@@ -30,9 +30,7 @@ Pod::Spec.new do |s|
   s.platform = :ios, '5.0'
 
 
-  s.source_files = FileList['Source/**/*.{h,m}'].exclude(/GNUstep/).exclude(/_Tests/),
-                   FileList['vendor/oauthconsumer/**/*.{h,m,c}'].exclude(/OAHMAC_SHA1SignatureProvider\.m/),
-                   FileList['vendor/fmdb/src/**/*.{h,m}']
+  s.source_files = FileList['Source/**/*.{h,m}'].exclude(/GNUstep/).exclude(/_Tests/).exclude(/TDC.m/).exclude(/TDConnectionChangeTracker.m/)
 
   s.header_dir = 'TouchDB'
 
@@ -59,7 +57,7 @@ Pod::Spec.new do |s|
         f.puts '#import "Test.h"'
 
         # add the version symbols to an arbitrary .m file
-        if path =~ /TDServer\.m/
+        if path =~ /TD_Server\.m/
           f.puts "const unsigned char TouchDBVersionString[] __attribute__ ((used)) = \"@(#)PROGRAM:TouchDB  PROJECT:TouchDB-#{version}\";"
           f.puts "const double TouchDBVersionNumber __attribute__ ((used)) = (double)#{version};"
         end
@@ -73,6 +71,10 @@ Pod::Spec.new do |s|
   s.dependency 'CocoaHTTPServer'
   s.dependency 'MYUtilities'
   s.dependency 'JSONKit'
+  s.dependency 'FMDB', '0.0.1'
+  s.dependency 'OAuthConsumer'
+
+  s.requires_arc = true
 
   s.framework = 'SystemConfiguration'
   s.library   = 'sqlite3'
