@@ -74,7 +74,7 @@ END OF TERMS AND CONDITIONS
 
   s.platform     = :ios, '5.0'
 
-  s.source_files = '*.{h,m}', 'Categories/*.{h,m}', 'Crypto/*.{h,m,c}'
+  s.source_files = FileList['*.{h,m}'].exclude('OAHMAC_SHA1SignatureProvider*'), 'Categories/*.{h,m}', 'Crypto/*.{h,m,c}'
 
   s.public_header_files = '*.h'
 
